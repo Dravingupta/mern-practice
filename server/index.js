@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
 const taskRoutes = require('./routes/taskRoutes');
+const cors = require('cors');
+
+
 
 connectDB()
   .then(() => {
@@ -14,7 +17,9 @@ connectDB()
       process.exit(1);
   });
 
+  app.use(cors());
 app.use(express.json());
+
 
 app.use('/tasks' , taskRoutes);  
 

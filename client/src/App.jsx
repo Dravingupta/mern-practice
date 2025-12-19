@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TaskList from './components/TaskList'
+import AddTask from './components/AddTask'
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <>
      <h1>Task app</h1>
      <TaskList />
+     <AddTask />
      </>
      
   )
