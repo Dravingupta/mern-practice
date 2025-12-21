@@ -8,7 +8,12 @@ const taskSchema = new mongoose.Schema({
   status: {
     type: Boolean,
     default: false
+  },
+  userid:{
+    type: String,   
+    required: true
   }
+
 });         
 const Task = mongoose.model('Task', taskSchema);
 
