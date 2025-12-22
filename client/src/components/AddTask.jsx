@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function AddTask() {
   const [title, setTitle] = useState("");
@@ -6,15 +7,18 @@ function AddTask() {
   const addTask = async () => {
     if (!title) return;
 
-    await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const res = await axios.post("http://localhost:3000/tasks" , 
+      {
+        "title": title,
+        "status": "false"
       },
-      body: JSON.stringify({ title }),
-    });
+      {
+        withCredentials: true
+      }
+    );
+    console.log(res);
 
-    setTitle(""); // clear input
+    
   };
 
   return (

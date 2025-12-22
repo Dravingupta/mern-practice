@@ -19,8 +19,11 @@ connectDB()
     process.exit(1);
 });
 
+app.use(cors({
+    origin: "http://localhost:5173", // React app
+    credentials: true                // 🔥 allow cookies
+}));
 app.use(cookieParser());
-app.use(cors());
 app.use(express.json());
 
 
