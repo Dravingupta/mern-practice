@@ -12,7 +12,8 @@ async function getAllTasks(req, res) {
 async function createTask (req , res) {
     try{
         const { title , status} = req.body ;
-        const task = new Task({title , status});
+        const userid = req.userid
+        const task = new Task({title , status , userid});
         await task.save() ;
         res.status(200).json(task);
     } catch(error){
