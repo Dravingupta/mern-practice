@@ -29,52 +29,52 @@ async function UserLogin(req, res) {
         const { email, password } = req.body;
         const user = await User.findOne({ "email": email })
         if (!user) {
-           return res.status(500).json({ "massage": "invalid credential" })
+            return res.status(500).json({ "massage": "invalid credential" })
             console.log(user)
         }
 
-        const ismatch = await  bcrypt.compare(password, user.password) 
-        if(!ismatch) {
-                console.log(user)
-               return res.status(401).json({ "massage": "invalid credential" })  
-            };
-        
-        const token =  jwt.sign({ userid: user._id } , "secret" , {expiresIn:"1d"}) 
+        const ismatch = await bcrypt.compare(password, user.password)
+        if (!ismatch) {
+            console.log(user)
+            return res.status(401).json({ "massage": "invalid credential" })
+        };
+
+        const token = jwt.sign({ userid: user._id }, "secret", { expiresIn: "1d" })
         res.cookie(
-            "token" , token , {
-                httpOnly: true ,
-                sameSite : "strict" ,
-                maxAge : 24 * 60 * 60 * 1000
-            }
+            "token", token, {
+            httpOnly: true,
+            sameSite: "strict",
+            maxAge: 24 * 60 * 60 * 1000
+        }
         );
         res.status(200).json({
-            "message" : "User Loged in" ,
-           
-        })   
+            "message": "User Loged in",
+
+        })
 
 
 
     } catch (error) {
         console.log(error)
 
-    res.status(500).json({"massage" : "internal error"})
+        res.status(500).json({ "massage": "internal error" })
 
     }
 
 }
 
-async function UserLogout(req , res ){
+async function UserLogout(req, res) {
     res.clearCookie(
-        "token" ,  {
-         httpOnly: true,
+        "token", {
+        httpOnly: true,
         sameSite: "strict"
-        }
+    }
     );
     res.json({
-        "message" : "loged out"
+        "message": "loged out"
     })
 }
 
-module.exports = { UserLogin, UserSignup , UserLogout }
+module.exports = { UserLogin, UserSignup, UserLogout }
 
 

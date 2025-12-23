@@ -6,6 +6,7 @@ const UserRoutes = require("./routes/userRoutes")
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const auth = require("./middlewares/authMiddleware")
+const User = require("./models/User")
 
 
 connectDB()
@@ -30,8 +31,9 @@ app.use(express.json());
 app.use('/tasks' , taskRoutes);  
 app.use('/auth' , UserRoutes); 
 app.get("/me", auth , (req , res)=>{
+
     res.json({
-        "message": "authrized",
+        "message": "yes",
         "id":req.userid
     })
 } ) 

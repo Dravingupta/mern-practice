@@ -20,7 +20,7 @@ function UserLogin() {
                 }
             );
             console.log(res);
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
     }
